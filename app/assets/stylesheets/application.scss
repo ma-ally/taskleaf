@@ -1,0 +1,31 @@
+/*=============================================================================
+  アプリケーション共通
+=============================================================================*/
+@import 'semantic-ui';
+
+@import 'utilities/utility';
+@import 'iro';
+@import 'header';
+@import 'footer';
+
+/*
+  main
+-----------------------------------------------------------------------------*/
+@media(max-width: 480px) {
+  main.ui.container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+/*
+  デバッグ情報
+-----------------------------------------------------------------------------*/
+.debug_dump {
+  margin-top:       2rem;
+  padding:          2rem;
+  border-radius:    1rem;
+  background-color: $sakurairo;
+}

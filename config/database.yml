@@ -1,0 +1,18 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: taskleaf_development
+
+test:
+  <<: *default
+  database: taskleaf_test
+
+production:
+  <<: *default
+  database: taskleaf_production
+  #  username: taskleaf
+  #  password: <%= ENV['taskleaf_DATABASE_PASSWORD'] %>
