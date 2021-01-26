@@ -1,0 +1,42 @@
+h1 Admin::Users#index 一蘭
+p Find me in app/views/admin/users/index.html.slim
+
+= @users[0].name
+= @users[1].name
+= @users[0].email
+
+h1 繰り返し
+table
+  tr
+    th 名前
+    th メールアドレス
+  - @users.each do |user|
+    tr
+      td = user.name
+      td = user.email
+
+h1 利用者一覧
+
+= link_to '新規登録', new_admin_user_path, class: 'ui primary button'
+
+table.ui.blue.striped.table
+  thead
+    th = User.human_attribute_name :name
+    th = User.human_attribute_name :email
+    th = User.human_attribute_name :admin
+    th = User.human_attribute_name :created_at
+    th = User.human_attribute_name :updated_at
+    th
+  tbody
+    - @users.each do |user|
+      tr
+        / td = link_to user.name, admin_user_path(user)
+        td = link_to user.name, [:admin, user]
+        td = user.email
+        td = user.admin? ? '有り' : '無し'
+        td = user.created_at
+        td = user.updated_at
+        td
+          / = link_to '編輯', edit_admin_user_path(user), class: 'btn btn-primary mr-3'
+          = link_to '編輯', [:edit, :admin, user], class: 'ui yellow button'
+          = link_to '削除', admin_user_path(user), method: :delete, data: { confirm: '本当に削除してよろしいですか' }, class: 'ui red button'

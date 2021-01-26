@@ -1,0 +1,77 @@
+- if task.errors.present?
+  ul#error_explanation
+    - task.errors.full_messages.each do |message|
+      li = message
+
+= form_with model: task, class: 'ui form', local: true do |f|
+  .field
+    = f.label :name
+    = f.text_field :name
+  .field
+    = f.label :description
+    = f.text_area :description
+
+    / 画像の選択できるようにする
+    / .field
+    /   = f.label :image
+    /   = f.file_field :image
+    /
+    /
+    / .field
+    /   = f.submit nil, class: 'ui primary button'
+
+  .field
+    = f.label :images
+    - if task.images.attached?# && task.images.blobs&.persisted?
+      .ui.cards
+        - task.images.each do |image|
+          .card
+            .image
+              = image_tag image
+              / = image_tag task.image.variant(resize_to_limit: [300, 300])
+            .extra.content
+              .ui.checkbox
+                = f.check_box :image_ids, { multiple: true }, image.id, false
+                = f.label "image_ids_#{image.id}"
+                  | &nbsp; 画像を削除する
+
+
+    = f.file_field :images, accept: 'image/jpg, image/jpeg, image/png, image/gif', multiple: true, id: 'embed_file_input'
+
+  .ui.fluid.action.input.mb-3
+    input#selected_filenames_display_area disabled="disabled" placeholder="画像ファイルはありません" type="text"
+    label.ui.small.teal.left.floated.button for="embed_file_input"
+      = semantic_icon('upload')
+      | 画像選択
+
+  = f.submit nil, class: 'ui primary button'
+
+css:
+  input[type="file"] {
+    display: none;
+  }
+  #selected_filenames_display_area {
+    opacity: 1;
+  }
+
+javascript:
+  // https://hakuhin.jp/js/input_file.html#INPUT_FILE_ON_CHANGE を洗練化
+
+  // "embed_file_input" という ID属性の要素を取得する。(画像選択ボタン)
+  const input_files = document.getElementById("embed_file_input");
+  // 選択ファイル名表示領域
+  const selected_filenames_display_area = document.getElementById("selected_filenames_display_area");
+
+  // 値が変化した時(ファイル選択時)に実行されるイベント
+  input_files.onchange = function() {
+    // FileList オブジェクトを取得する
+    let file_lists = input_files.files;
+    // 画像ファイル名格納用の配列
+    let file_names = []
+    for (let i = 0; i < file_lists.length; i++) {
+      // File オブジェクトより、画像ファイル名を取得する
+      file_names.push(file_lists[i].name)
+    }
+    // 選択ファイル名表示領域に、画像ファイル名を書き出す
+    selected_filenames_display_area.value = file_names.join(', ')
+  }

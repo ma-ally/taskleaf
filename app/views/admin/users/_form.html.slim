@@ -1,0 +1,23 @@
+- if user.errors.present?
+  ul#error_explanation
+    - user.errors.full_messages.each do |message|
+      li = message
+
+= form_with model: [:admin, user], class: 'ui form', local: true do |f|
+  .field
+    = f.label :name, '名前'
+    = f.text_field :name
+  .field
+    = f.label :email, '電子メール'
+    = f.text_field :email
+  .field
+    = f.label :password, 'パスワード'
+    = f.password_field :password
+  .field
+    = f.label :password_confirmation, 'パスワード(確認)'
+    = f.password_field :password_confirmation
+  .field
+    = f.label :admin
+      = f.check_box :admin
+      | 管理者権限
+  = f.submit '登録する', class: 'ui primary button'

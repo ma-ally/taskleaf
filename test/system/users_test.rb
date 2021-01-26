@@ -7,8 +7,8 @@ class UsersTest < ApplicationSystemTestCase
 
   test "パスワードが正しいと、ログインできる" do
     visit login_url
-    fill_in 'メールアドレス', with: @user.email
-    fill_in 'パスワード', with: 'password'
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: 'password'
     click_on 'ログインする'
 
     assert_selector ".ui.success.message", text: "ログインしました"
@@ -16,8 +16,8 @@ class UsersTest < ApplicationSystemTestCase
 
   test "パスワードが違うと、ログインできない" do
     visit login_url
-    fill_in 'メールアドレス', with: @user.email
-    fill_in 'パスワード', with: 'wrong password'
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: 'password'
     click_on 'ログインする'
 
     assert_selector ".ui.error.message", text: "メールアドレス または パスワードが異なります"

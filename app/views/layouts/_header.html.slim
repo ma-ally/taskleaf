@@ -16,21 +16,21 @@ header.ui.top.fixed.menu.computer.only
       = link_to root_path do
         = image_tag('renge.jpg', alt: 'logo')
         h1
-          | Taskleaf
+          | タスクリーフ
           = semantic_icon('leaf')
 
     .right.menu
-      .ui.dropdown.item
-        | 会社案内
-        i.dropdown.icon
-        .menu
-          = link_to '経営理念', root_path, class: 'ui item'
-          = link_to '会社沿革', root_path, class: 'ui item'
-          = link_to '会社概要', root_path, class: 'ui item'
-          .divider
-          = link_to '採用情報', root_path, class: 'ui item'
+      /.ui.dropdown.item
+      /  | 会社案内
+      /  i.dropdown.icon
+      /  .menu
+      /    = link_to '経営理念', root_path, class: 'ui item'
+      /    = link_to '会社沿革', root_path, class: 'ui item'
+      /    = link_to '会社概要', root_path, class: 'ui item'
+      /    .divider
+      /    = link_to '採用情報', root_path, class: 'ui item'
 
-      = link_to 'お問い合わせ', root_path, class: 'ui item'
+      / = link_to 'お問い合わせ', root_path, class: 'ui item'
 
       .item
         form class="ui form" action="/tasks"
@@ -41,6 +41,7 @@ header.ui.top.fixed.menu.computer.only
             button.ui.primary.basic.small.button type="submit"
               | 検索
       .item
+        / = link_to 'タスク一覧', tasks_path, class: 'ui primary tertiary button'
         - if current_user
           = link_to 'タスク一覧', tasks_path, class: 'ui primary tertiary button'
           - if current_user.admin?

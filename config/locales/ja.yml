@@ -7,8 +7,17 @@ ja:
           has_one: "%{record}が存在しているので削除できません"
           has_many: "%{record}が存在しているので削除できません"
     models:
+      task: タスク
       user: 利用者
     attributes:
+      task:
+        id: ID
+        name: 名前
+        description: 説明
+        image: 画像
+        images: 画像
+        created_at: 登録日時(とうろくにちじ)
+        updated_at: 更新日時
       user:
         id: ID
         name: 名前
